@@ -309,7 +309,7 @@ def test_sending_using_network_sockets(send_method, monkeypatch):
     url_relative = "svc"
     url = "http://%s/%s" % (host_port, url_relative)
     partial_ascii_byte_data = suds.byte_str("Muka-laka-hiki")
-    non_ascii_byte_data = u("\u0414\u043C\u0438 \u0442\u0440").encode("utf-8")
+    non_ascii_byte_data = u("\\u0414\\u043C\\u0438 \\u0442\\u0440").encode("utf-8")
     non_ascii_byte_data += partial_ascii_byte_data
     mocker = Mocker(host, port)
     monkeypatch.setattr("socket.getaddrinfo", mocker.getaddrinfo)

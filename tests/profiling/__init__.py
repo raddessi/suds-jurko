@@ -34,8 +34,8 @@ class ProfilerBase(object):
         self.show_minimum = show_minimum
 
     def timeit(self, method_name, number, repeat=5):
-        print("Timing '%s' (looping %d times, %d timings)" % (method_name,
-            number, repeat))
+        print(("Timing '%s' (looping %d times, %d timings)" % (method_name,
+            number, repeat)))
         # We want to pass 'self' as input to the timing functionality
         # implemented in the timeit module, but its interface only allows
         # sharing data via global storage.
@@ -52,14 +52,14 @@ class ProfilerBase(object):
                     time = timer.timeit(number)
                     times.append(time)
                     if self.show_each_timing:
-                        print("%d. %s" % (time,))
+                        print(("%d. %s" % (time,)))
             except (KeyboardInterrupt, SystemExit):
                 raise
             except Exception:
                 timer.print_exc()
             else:
                 if self.show_minimum:
-                    print(min(times))
+                    print((min(times)))
             return times
         finally:
             try:

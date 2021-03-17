@@ -598,13 +598,13 @@ def test_missing_parameters():
   </Body>
 </Envelope>""" % (xsd_target_namespace,))
 
-    _assert_request_content(service.f((u("Pero \u017Ddero"))), u("""\
+    _assert_request_content(service.f((u("Pero \\u017Ddero"))), u("""\
 <?xml version="1.0" encoding="UTF-8"?>
 <Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
   <Header/>
   <Body>
     <Wrapper xmlns="%s">
-      <aString>Pero \u017Ddero</aString>
+      <aString>Pero \\u017Ddero</aString>
       <anInteger/>
     </Wrapper>
   </Body>

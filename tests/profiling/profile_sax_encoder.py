@@ -48,10 +48,10 @@ class Profiler(tests.profiling.ProfilerBase):
         self.decode_input = self.__construct_input(long_input, replacements,
             cdata, encoded=True)
 
-        print("long_input=%s; replacements=%s; cdata=%s" % (long_input,
-            QUANTITY[replacements], QUANTITY[cdata]))
-        print("  encode input data length: %d" % (len(self.encode_input),))
-        print("  decode input data length: %d" % (len(self.decode_input),))
+        print(("long_input=%s; replacements=%s; cdata=%s" % (long_input,
+            QUANTITY[replacements], QUANTITY[cdata])))
+        print(("  encode input data length: %d" % (len(self.encode_input),)))
+        print(("  decode input data length: %d" % (len(self.decode_input),)))
 
     def decode(self):
         suds.sax.enc.Encoder().decode(self.decode_input)
@@ -90,7 +90,7 @@ class Profiler(tests.profiling.ProfilerBase):
 
 
 if __name__ == "__main__":
-    print("Python %s" % (sys.version,))
+    print(("Python %s" % (sys.version,)))
     print("")
     p = Profiler(long_input=True, replacements=MANY, cdata=MANY)
     p.timeit('encode', 18)

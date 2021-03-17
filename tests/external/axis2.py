@@ -24,7 +24,7 @@ from datetime import datetime
 
 errors = 0
 url = 'http://localhost:8080/axis2/services/BasicService?wsdl'
-print('url=%s' % (url,))
+print(('url=%s' % (url,)))
 
 #
 # create a service client using the wsdl.
@@ -37,14 +37,14 @@ client = Client(url)
 print(client)
 
 print('printList()')
-print(client.service.printList(['a', 'b']))
+print((client.service.printList(['a', 'b'])))
 
 #
 # create a name object using the wsdl
 #
 print('create name')
 name = client.factory.create('ns2:Name')
-name.first = u'jeff'+unichr(1234)
+name.first = 'jeff'+chr(1234)
 name.last = 'ortel'
 
 print(name)
@@ -80,7 +80,7 @@ person = client.factory.create('ns2:Person')
 #
 # inspect empty person
 #
-print('{empty} person=\n%s' % (person,))
+print(('{empty} person=\n%s' % (person,)))
 
 person.name = name
 person.age = None
@@ -92,14 +92,14 @@ person.pets.append(dog)
 #
 # inspect person
 #
-print('person=\n%s' % (person,))
+print(('person=\n%s' % (person,)))
 
 #
 # add the person (using the webservice)
 #
 print('addPersion()')
 result = client.service.addPerson(person)
-print('\nreply(\n%s\n)\n' % (result.encode('utf-8'),))
+print(('\nreply(\n%s\n)\n' % (result.encode('utf-8'),)))
 
 #
 # create a new name object used to update the person
@@ -113,9 +113,9 @@ newname.last = None
 #
 print('updatePersion()')
 result = client.service.updatePerson(person, newname)
-print('\nreply(\n%s\n)\n' % (str(result),))
+print(('\nreply(\n%s\n)\n' % (str(result),)))
 result = client.service.updatePerson(person, None)
-print('\nreply(\n%s\n)\n' % (str(result),))
+print(('\nreply(\n%s\n)\n' % (str(result),)))
 
 
 #
@@ -124,18 +124,18 @@ print('\nreply(\n%s\n)\n' % (str(result),))
 print('echo()')
 client.service.echo(None)
 result = client.service.echo('this is cool')
-print('\nreply( %s )\n' % (str(result),))
+print(('\nreply( %s )\n' % (str(result),)))
 
 print('echo() with {none}')
 result = client.service.echo(None)
-print('\nreply( %s )\n' % (str(result),))
+print(('\nreply( %s )\n' % (str(result),)))
 
 #
 # invoke the hello service
 #
 print('hello()')
 result = client.service.hello()
-print('\nreply( %s )\n' % (str(result),))
+print(('\nreply( %s )\n' % (str(result),)))
 
 #
 # invoke the testVoid service
@@ -143,11 +143,11 @@ print('\nreply( %s )\n' % (str(result),))
 try:
     print('getVoid()')
     result = client.service.getVoid()
-    print('\nreply( %s )\n' % (str(result),))
+    print(('\nreply( %s )\n' % (str(result),)))
 except (KeyboardInterrupt, SystemExit):
     raise
 except Exception:
-    print(sys.exc_info()[1])
+    print((sys.exc_info()[1]))
 
 #
 # test list args
@@ -155,20 +155,20 @@ except Exception:
 print('getList(list)')
 mylist = ['my', 'dog', 'likes', 'steak']
 result = client.service.printList(mylist)
-print('\nreply( %s )\n' % (str(result),))
+print(('\nreply( %s )\n' % (str(result),)))
 # tuple
 print('testListArgs(tuple)')
 mylist = ('my', 'dog', 'likes', 'steak')
 result = client.service.printList(mylist)
-print('\nreply( %s )\n' % (str(result),))
+print(('\nreply( %s )\n' % (str(result),)))
 
 #
 # test list returned
 #
 for n in range(0, 3):
-    print('getList(str, %d)' % (n,))
+    print(('getList(str, %d)' % (n,)))
     result = client.service.getList('hello', n)
-    print('\nreply( %s )\n' % (str(result),))
+    print(('\nreply( %s )\n' % (str(result),)))
     assert ( isinstance(result, list) and len(result) == n )
 
 print('addPet()')
@@ -178,11 +178,11 @@ dog.trained = True
 print(dog)
 try:
     result = client.service.addPet(person, dog)
-    print('\nreply( %s )\n' % (str(result),))
+    print(('\nreply( %s )\n' % (str(result),)))
 except (KeyboardInterrupt, SystemExit):
     raise
 except Exception:
-    print(sys.exc_info()[1])
+    print((sys.exc_info()[1]))
 
 print('___________________ E X C E P T I O N S __________________________')
 
@@ -192,11 +192,11 @@ print('___________________ E X C E P T I O N S __________________________')
 try:
     print('throwException() faults=True')
     result = client.service.throwException()
-    print('\nreply( %s )\n' % (tostr(result),))
+    print(('\nreply( %s )\n' % (tostr(result),)))
 except (KeyboardInterrupt, SystemExit):
     raise
 except Exception:
-    print(sys.exc_info()[1])
+    print((sys.exc_info()[1]))
 
 #
 # test faults
@@ -205,10 +205,10 @@ try:
     print('throwException() faults=False')
     client.set_options(faults=False)
     result = client.service.throwException()
-    print('\nreply( %s )\n' % (tostr(result),))
+    print(('\nreply( %s )\n' % (tostr(result),)))
 except (KeyboardInterrupt, SystemExit):
     raise
 except Exception:
-    print(sys.exc_info()[1])
+    print((sys.exc_info()[1]))
 
-print('\nfinished: errors=%d' % (errors,))
+print(('\nfinished: errors=%d' % (errors,)))

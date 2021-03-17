@@ -2149,7 +2149,7 @@ def _element_node_xml(name, min=None, max=None):
 
 def _first_from_dict(d):
     """Returns the first name/value pair from a dictionary or None if empty."""
-    for x in d.items():
+    for x in list(d.items()):
         return x[0], x[1]
 
 

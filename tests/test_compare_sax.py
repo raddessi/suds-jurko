@@ -79,7 +79,7 @@ class TestMatched:
         ('<a xmlns="one"/>', '<ns:a xmlns:ns="one"/>'),
         ('<ns1:b xmlns:ns1="two"/>', '<ns2:b xmlns:ns2="two"/>'),
         # Numeric unicode character references.
-        (u("<a>\u2606</a>"), "<a>&#%d;</a>" % (0x2606,))))
+        (u("<a>\\u2606</a>"), "<a>&#%d;</a>" % (0x2606,))))
     def test_data2data(self, data1, data2, capsys):
         CompareSAX.data2data(data1, data2)
         assert_no_output(capsys)
@@ -95,7 +95,7 @@ class TestMatched:
     @skip_test_if_CompareSAX_assertions_disabled
     def test_xml_encoding(self, capsys):
         """Test that the encoding listed in the XML declaration is honored."""
-        xml_format = u('<?xml version="1.0" encoding="%s"?><a>\u00D8</a>')
+        xml_format = u('<?xml version="1.0" encoding="%s"?><a>\\u00D8</a>')
         data1 = (xml_format % ("UTF-8",)).encode('utf-8')
         data2 = (xml_format % ("latin1",)).encode('latin1')
         CompareSAX.data2data(data1, data2)

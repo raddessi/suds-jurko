@@ -28,7 +28,7 @@ errors = 0
 def start(url):
     global errors
     print('\n______________________________________________________________\n')
-    print('Test @ ( %s ) %d' % (url, errors))
+    print(('Test @ ( %s ) %d' % (url, errors)))
 
 try:
     url = 'http://mssoapinterop.org/asmx/simple.asmx?WSDL'
@@ -39,38 +39,38 @@ try:
     input = "42"
     d = dict(inputString=input)
     result = client.service.echoString(**d)
-    print('echoString() = %s' % (result,))
+    print(('echoString() = %s' % (result,)))
     assert result == input
     # int
     input = 42
     result = client.service.echoInteger(input)
-    print('echoInteger() = %s' % (result,))
+    print(('echoInteger() = %s' % (result,)))
     assert result == input
     # float
     input = 4.2
     result = client.service.echoFloat(input)
-    print('echoFloat() = %s' % (result,))
+    print(('echoFloat() = %s' % (result,)))
     assert result == input
     # suds 0.3.8+
     result = client.service.echoIntegerArray([])
-    print('echoIntegerArray() = %s' % (result,))
+    print(('echoIntegerArray() = %s' % (result,)))
     assert result is None
     input = [1, 2, 3, 4]
     result = client.service.echoIntegerArray(input)
-    print('echoIntegerArray() = %s' % (result,))
+    print(('echoIntegerArray() = %s' % (result,)))
     assert result == input
     result = client.service.echoIntegerArray(inputIntegerArray=input)
-    print('echoIntegerArray() = %s' % (result,))
+    print(('echoIntegerArray() = %s' % (result,)))
     assert result == input
-except WebFault, f:
+except WebFault as f:
     errors += 1
     print(f)
-    print(f.fault)
+    print((f.fault))
 except (KeyboardInterrupt, SystemExit):
     raise
 except Exception:
     errors += 1
-    print(sys.exc_info()[1])
+    print((sys.exc_info()[1]))
     tb.print_exc()
 
 try:
@@ -79,38 +79,38 @@ try:
     client = Client(url)
     print(client)
     token = client.service.login('soaptester', 'soaptester')
-    print('token="%s"' % (token,))
+    print(('token="%s"' % (token,)))
     user = client.service.getUser(token, 'soaptester')
-    print('user="%s"' % (user,))
-except WebFault, f:
+    print(('user="%s"' % (user,)))
+except WebFault as f:
     errors += 1
     print(f)
-    print(f.fault)
+    print((f.fault))
 except (KeyboardInterrupt, SystemExit):
     raise
 except Exception:
     errors += 1
-    print(sys.exc_info()[1])
+    print((sys.exc_info()[1]))
     tb.print_exc()
 
 try:
     url = 'http://jira.atlassian.com/rpc/soap/jirasoapservice-v2?wsdl'
     start(url+'  ** cloned **')
     client = Client(url).clone()
-    print('**clone**\n%s' % (client,))
+    print(('**clone**\n%s' % (client,)))
     token = client.service.login('soaptester', 'soaptester')
-    print('**clone** token="%s"' % (token,))
+    print(('**clone** token="%s"' % (token,)))
     user = client.service.getUser(token, 'soaptester')
-    print('**clone** user="%s"' % (user,))
-except WebFault, f:
+    print(('**clone** user="%s"' % (user,)))
+except WebFault as f:
     errors += 1
     print(f)
-    print(f.fault)
+    print((f.fault))
 except (KeyboardInterrupt, SystemExit):
     raise
 except Exception:
     errors += 1
-    print(sys.exc_info()[1])
+    print((sys.exc_info()[1]))
     tb.print_exc()
 
 try:
@@ -118,16 +118,16 @@ try:
     start(url)
     client = Client(url)
     print(client)
-    print(client.service.getQuote(False))
-except WebFault, f:
+    print((client.service.getQuote(False)))
+except WebFault as f:
     errors += 1
     print(f)
-    print(f.fault)
+    print((f.fault))
 except (KeyboardInterrupt, SystemExit):
     raise
 except Exception:
     errors += 1
-    print(sys.exc_info()[1])
+    print((sys.exc_info()[1]))
     tb.print_exc()
 
 try:
@@ -137,19 +137,19 @@ try:
     print(client)
     #client.setport(0)
     group = client.factory.create('Group')
-    print('Group:\n%s' % (group,))
+    print(('Group:\n%s' % (group,)))
     print('LoadGroupHierarchy("demo")')
     groupHierarchy = client.service.LoadGroupHierarchy("demo")
-    print('result:\n%s' % (groupHierarchy,))
-except WebFault, f:
+    print(('result:\n%s' % (groupHierarchy,)))
+except WebFault as f:
     errors += 1
     print(f)
-    print(f.fault)
+    print((f.fault))
 except (KeyboardInterrupt, SystemExit):
     raise
 except Exception:
     errors += 1
-    print(sys.exc_info()[1])
+    print((sys.exc_info()[1]))
     tb.print_exc()
 
 try:
@@ -159,16 +159,16 @@ try:
     print(client)
     #client.setport(0)
     tpa = client.factory.create('ns1:TPA_Extensions')
-    print(client.service.Ping(tpa, "hello"))
-except WebFault, f:
+    print((client.service.Ping(tpa, "hello")))
+except WebFault as f:
     errors += 1
     print(f)
-    print(f.fault)
+    print((f.fault))
 except (KeyboardInterrupt, SystemExit):
     raise
 except Exception:
     errors += 1
-    print(sys.exc_info()[1])
+    print((sys.exc_info()[1]))
     tb.print_exc()
 
 try:
@@ -176,16 +176,16 @@ try:
     start(url)
     client = Client(url)
     print(client)
-    print(client.service.genSSHA('hello', 'sha1'))
-except WebFault, f:
+    print((client.service.genSSHA('hello', 'sha1')))
+except WebFault as f:
     errors += 1
     print(f)
-    print(f.fault)
+    print((f.fault))
 except (KeyboardInterrupt, SystemExit):
     raise
 except Exception:
     errors += 1
-    print(sys.exc_info()[1])
+    print((sys.exc_info()[1]))
     tb.print_exc()
 
 try:
@@ -197,15 +197,15 @@ try:
     print('Logon()')
     reply = client.service.Logon('testuser', 'test')
     print(reply)
-except WebFault, f:
+except WebFault as f:
     errors += 1
     print(f)
-    print(f.fault)
+    print((f.fault))
 except (KeyboardInterrupt, SystemExit):
     raise
 except Exception:
     errors += 1
-    print(sys.exc_info()[1])
+    print((sys.exc_info()[1]))
     tb.print_exc()
 
 try:
@@ -213,15 +213,15 @@ try:
     start(url)
     client = Client(url)
     print(client)
-except WebFault, f:
+except WebFault as f:
     errors += 1
     print(f)
-    print(f.fault)
+    print((f.fault))
 except (KeyboardInterrupt, SystemExit):
     raise
 except Exception:
     errors += 1
-    print(sys.exc_info()[1])
+    print((sys.exc_info()[1]))
     tb.print_exc()
 
 try:
@@ -233,15 +233,15 @@ try:
     print(env)
     options = client.factory.create('ns4:MapImageOptions')
     print(options)
-except WebFault, f:
+except WebFault as f:
     errors += 1
     print(f)
-    print(f.fault)
+    print((f.fault))
 except (KeyboardInterrupt, SystemExit):
     raise
 except Exception:
     errors += 1
-    print(sys.exc_info()[1])
+    print((sys.exc_info()[1]))
     tb.print_exc()
 
 try:
@@ -250,16 +250,16 @@ try:
     client = Client(url)
     print(client)
     #client.setport(0)
-    print(client.service.getBank("76251020"))
-except WebFault, f:
+    print((client.service.getBank("76251020")))
+except WebFault as f:
     errors += 1
     print(f)
-    print(f.fault)
+    print((f.fault))
 except (KeyboardInterrupt, SystemExit):
     raise
 except Exception:
     errors += 1
-    print(sys.exc_info()[1])
+    print((sys.exc_info()[1]))
     tb.print_exc()
 
 try:
@@ -267,15 +267,15 @@ try:
     start(url)
     client = Client(url)
     print(client)
-except WebFault, f:
+except WebFault as f:
     errors += 1
     print(f)
-    print(f.fault)
+    print((f.fault))
 except (KeyboardInterrupt, SystemExit):
     raise
 except Exception:
     errors += 1
-    print(sys.exc_info()[1])
+    print((sys.exc_info()[1]))
     tb.print_exc()
 
 timer = metrics.Timer()
@@ -287,21 +287,21 @@ try:
     client = Client(url)
     #client.setport(0)
     timer.stop()
-    print('create client: %s' % (timer,))
+    print(('create client: %s' % (timer,)))
     timer.start()
     s = str(client)
     timer.stop()
-    print('str(client): %s' % (timer,))
-    print('client:\n%s' % (s,))
-except WebFault, f:
+    print(('str(client): %s' % (timer,)))
+    print(('client:\n%s' % (s,)))
+except WebFault as f:
     errors += 1
     print(f)
-    print(f.fault)
+    print((f.fault))
 except (KeyboardInterrupt, SystemExit):
     raise
 except Exception:
     errors += 1
-    print(sys.exc_info()[1])
+    print((sys.exc_info()[1]))
     tb.print_exc()
 
-print('\nFinished: errors = %d' % (errors,))
+print(('\nFinished: errors = %d' % (errors,)))

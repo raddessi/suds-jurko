@@ -31,7 +31,7 @@ from suds.transport import Reply, Request, Transport
 import suds.transport.options
 
 import pytest
-from six import b, text_type, u, unichr
+from six import b, text_type, u, chr
 
 import sys
 
@@ -62,8 +62,8 @@ class TestReply:
         (1, {}, u("ola")),
         (1, {}, b("ola")),
         (1, {}, object()),
-        (1, {}, u("\u0161u\u0107-mu\u0107 \u4E2D\u539F\u5343\n\u57CE")),
-        (2, {"semper": "fi"}, u("\u4E2D\u539F\u5343\n\u57CE"))))
+        (1, {}, u("\\u0161u\\u0107-mu\\u0107 \\u4E2D\\u539F\\u5343\n\\u57CE")),
+        (2, {"semper": "fi"}, u("\\u4E2D\\u539F\\u5343\n\\u57CE"))))
     def test_construction(self, code, headers, message):
         reply = Reply(code, headers, message)
         assert reply.code is code
@@ -77,10 +77,10 @@ class TestReply:
 I'm here to kick ass,
 and chew bubble gum...
 and I'm all out of gum.""",
-        "\u0161u\u0107-mu\u0107 pa o\u017Ee\u017Ei.. za 100 \u20AC\n\n"
+        "\\u0161u\\u0107-mu\\u0107 pa o\\u017Ee\\u017Ei.. za 100 \\u20AC\n\n"
             "with multiple\nlines...",
         "\n\n\n\n\n\n",
-        "\u4E2D\u539F\u5343\u519B\u9010\u848B")])
+        "\\u4E2D\\u539F\\u5343\\u519B\\u9010\\u848B")])
     def test_string_representation(self, message):
         code = 17
         reply = Reply(code, {"aaa": 1}, message)
@@ -99,7 +99,7 @@ class TestRequest:
     @pytest.mark.parametrize("message", (
         None,
         "it's hard out here...",
-        u("\u57CE\u697C\u4E07\u4F17\u68C0\u9605")))
+        u("\\u57CE\\u697C\\u4E07\\u4F17\\u68C0\\u9605")))
     def test_construct(self, message):
         # Always use the same URL as different ways to specify a Request's URL
         # are tested separately.
@@ -115,11 +115,11 @@ class TestRequest:
         assert request.message is None
 
     test_non_ASCII_URLs = [
-        u("\u4E2D\u539F\u5343\u519B\u9010\u848B"),
-        u("\u57CE\u697C\u4E07\u4F17\u68C0\u9605")] + [
+        u("\\u4E2D\\u539F\\u5343\\u519B\\u9010\\u848B"),
+        u("\\u57CE\\u697C\\u4E07\\u4F17\\u68C0\\u9605")] + [
         url_prefix + url_suffix
             for url_prefix in (u(""), u("Jurko"))
-            for url_suffix in (unichr(128), unichr(200), unichr(1000))]
+            for url_suffix in (chr(128), chr(200), chr(1000))]
     @pytest.mark.parametrize("url",
         test_non_ASCII_URLs +  # unicode strings
         [x.encode("utf-8") for x in test_non_ASCII_URLs])  # byte strings
@@ -135,12 +135,12 @@ class TestRequest:
 I'm here to kick ass,
 and chew bubble gum...
 and I'm all out of gum."""),
-        ("", {}, u("\u0161u\u0107-mu\u0107 pa o\u017Ee\u017Ei.. za 100 "
-            "\u20AC\n\nwith multiple\nlines...")),
+        ("", {}, u("\\u0161u\\u0107-mu\\u0107 pa o\\u017Ee\\u017Ei.. za 100 "
+            "\\u20AC\n\nwith multiple\nlines...")),
         ("", {}, "\n\n\n\n\n\n"),
-        ("", {}, u("\u4E2D\u539F\u5343\u519B\u9010\u848B"))))
+        ("", {}, u("\\u4E2D\\u539F\\u5343\\u519B\\u9010\\u848B"))))
     def test_string_representation_with_message(self, url, headers, message):
-        for key, value in headers.items():
+        for key, value in list(headers.items()):
             old_key = key
             if isinstance(key, text_type):
                 key = key.encode("utf-8")
@@ -179,10 +179,10 @@ HEADERS: %s""") % (url, request.headers)
         u("cogito://ergo/sum"),
         u("haleluya"),
         u("look  at  me flyyyyyyyy"),
-        unichr(0),
-        unichr(127),
-        u("Jurko") + unichr(0),
-        u("Jurko") + unichr(127)]
+        chr(0),
+        chr(127),
+        u("Jurko") + chr(0),
+        u("Jurko") + chr(127)]
     @pytest.mark.parametrize("url", test_URLs + [
         url.encode("ascii") for url in test_URLs])
     def test_URL(self, url):

@@ -108,8 +108,8 @@ if script_folder != current_folder:
     print("ERROR: Suds library setup script needs to be run from the folder "
         "containing it.")
     print("")
-    print("Current folder: %s" % current_folder)
-    print("Script folder: %s" % script_folder)
+    print(("Current folder: %s" % current_folder))
+    print(("Script folder: %s" % script_folder))
     sys.exit(-2)
 
 
@@ -367,9 +367,9 @@ def safe_version(version_string):
     version_string = version_string.replace(" ", ".")
     return re.sub("[^A-Za-z0-9.]+", "-", version_string)
 
-def unicode2ascii(unicode):
+def unicode2ascii(str):
     """Convert a unicode string to its approximate ASCII equivalent."""
-    return unicode.encode("ascii", 'xmlcharrefreplace').decode("ascii")
+    return str.encode("ascii", 'xmlcharrefreplace').decode("ascii")
 
 
 # -----------------------------------------------------------------------------

@@ -172,9 +172,9 @@ value_p11 = b("pero11")
 value_p111 = b("pero111")
 value_p2 = b("pero2")
 value_p22 = b("pero22")
-value_unicode = u("\u20AC \u7684 "
-    "\u010D\u0107\u017E\u0161\u0111"
-    "\u010C\u0106\u017D\u0160\u0110").encode("utf-8")
+value_unicode = u("\\u20AC \\u7684 "
+    "\\u010D\\u0107\\u017E\\u0161\\u0111"
+    "\\u010C\\u0106\\u017D\\u0160\\u0110").encode("utf-8")
 
 
 # FileCache item expiration test data - duration, current_time, expect_remove.

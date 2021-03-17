@@ -165,9 +165,9 @@ class TestXBoolean:
     @pytest.mark.parametrize("source", (
         None,
         pytest.mark.skipif(sys.version_info >= (3,),
-            reason="int == long since Python 3.0")(long(0)),
+            reason="int == long since Python 3.0")(int(0)),
         pytest.mark.skipif(sys.version_info >= (3,),
-            reason="int == long since Python 3.0")(long(1)),
+            reason="int == long since Python 3.0")(int(1)),
         "x",
         "True",
         "False",
@@ -476,10 +476,10 @@ class TestXInteger:
         1,
         50,
         # long
-        long(-50),
-        long(0),
-        long(1),
-        long(50),
+        int(-50),
+        int(0),
+        int(1),
+        int(50),
         # str
         "x",
         # other
@@ -536,10 +536,10 @@ class TestXLong:
         1,
         50,
         # long
-        long(-50),
-        long(0),
-        long(1),
-        long(50),
+        int(-50),
+        int(0),
+        int(1),
+        int(50),
         # str
         "x",
         # other
@@ -558,7 +558,7 @@ class TestXLong:
         ("100", 100)))
     def test_to_python_object(self, source, expected):
         translated = MockXLong().translate(source)
-        assert translated.__class__ is long
+        assert translated.__class__ is int
         assert translated == expected
 
     @pytest.mark.parametrize("source",
@@ -580,7 +580,7 @@ class TestXLong:
             # Using different Python interpreter versions and different source
             # strings results in different exception messages here.
             try:
-                long(source)
+                int(source)
                 pytest.fail("Bad test data.")
             except ValueError:
                 assert str(e) == str(sys.exc_info()[1])

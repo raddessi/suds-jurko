@@ -98,7 +98,7 @@ exec_file(%(script)r)
     "sys.path": sys_path})
     if popen.returncode != 0 or err or out:
         if popen.returncode != 0:
-            print("Test process exit code: %d" % (popen.returncode,))
+            print(("Test process exit code: %d" % (popen.returncode,)))
         if out:
             print("Test process stdout:")
             print(out)

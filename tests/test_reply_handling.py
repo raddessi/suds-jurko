@@ -179,9 +179,9 @@ def test_empty_reply():
 def test_fault_reply_with_unicode_faultstring(monkeypatch):
     monkeypatch.delitem(locals(), "e", False)
 
-    unicode_string = u("\u20AC Jurko Gospodneti\u0107 "
-        "\u010C\u0106\u017D\u0160\u0110"
-        "\u010D\u0107\u017E\u0161\u0111")
+    unicode_string = u("\\u20AC Jurko Gospodneti\\u0107 "
+        "\\u010C\\u0106\\u017D\\u0160\\u0110"
+        "\\u010D\\u0107\\u017E\\u0161\\u0111")
     fault_xml = suds.byte_str(u("""\
 <?xml version="1.0"?>
 <env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
